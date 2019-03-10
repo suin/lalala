@@ -1,18 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lalala\Movie\Domain;
 
-
 class MovieTitle
 {
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
     /**
      * @var string
      */
@@ -21,5 +14,10 @@ class MovieTitle
     public function __construct(string $title)
     {
         $this->title = $title;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 }

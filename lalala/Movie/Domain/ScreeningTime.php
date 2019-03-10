@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lalala\Movie\Domain;
-
 
 class ScreeningTime
 {
@@ -11,16 +11,16 @@ class ScreeningTime
      */
     private $screeningTime;
 
+    public function __construct(int $screeningTime)
+    {
+        $this->screeningTime = $screeningTime;
+    }
+
     /**
      * @return int
      */
     public function getScreeningTime(): int
     {
         return $this->screeningTime;
-    }
-
-    public function __construct(int $screeningTime)
-    {
-        $this->screeningTime = $screeningTime;
     }
 }

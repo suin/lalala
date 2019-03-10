@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Model;
+declare(strict_types=1);
+
+namespace Lalala\Movie\Adapter\Downstream\Laravel\Persistence;
 
 use Illuminate\Database\Eloquent\Model;
 

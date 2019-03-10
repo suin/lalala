@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Lalala\Movie\Adapter\Downstream\Laravel\Persistence\LaravelMovieRepository;
+use Lalala\Movie\Application\MovieRegistration\MovieRegistration;
+use Lalala\Movie\Application\MovieRegistration\MovieRegistrationInput;
+use Lalala\Movie\Application\MovieRegistration\MovieRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,16 +18,12 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            \Lalala\Movie\UseCase\InputPort\MovieRegister::class,
-            \Lalala\Movie\UseCase\Interactor\MovieRegisterInteractor::class
+            MovieRegistrationInput::class,
+            MovieRegistration::class
         );
         $this->app->bind(
-            \Lalala\Movie\UseCase\GateWay\MovieRepository::class,
-            \Lalala\Movie\Infra\LaravelMovieRepository::class
-        );
-        $this->app->bind(
-            \Lalala\Movie\UseCase\OutPutPort\MovieRegisteredResult::class,
-            \Lalala\Movie\App\MovieRegisteredOutputPresenter::class
+            MovieRepository::class,
+            LaravelMovieRepository::class
         );
     }
 

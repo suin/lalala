@@ -1,21 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+declare(strict_types=1);
 
-use App\Movie;
+namespace Lalala\Movie\Adapter\Upstream\Laravel\Http;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Lalala\Movie\App\MovieController as CoreMovieController;
+use Illuminate\Support\Facades\View;
+use Lalala\Movie\Application\MovieRegistration\MovieData;
+use Lalala\Movie\Application\MovieRegistration\MovieRegistrationInput;
 
-class MovieController extends Controller
+final class MovieController extends Controller
 {
     /**
-     * @var CoreMovieController
+     * @var MovieRegistrationInput
      */
-    private $controller;
+    private $movieRegistration;
 
-    public function __construct(CoreMovieController $controller)
+    public function __construct(MovieRegistrationInput $movieRegistration)
     {
-        $this->controller = $controller;
+        $this->movieRegistration = $movieRegistration;
     }
 
     /**
@@ -25,12 +29,10 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $result = $this->controller->register(
-            'アナと雪の女王',
-            '109'
-        );
-
-        return view('movie', ['movieId' => $result->getMovieId()]);
+        $movie = new MovieData('アナと雪の女王', 109);
+        $view = new RegisteredMoviePresenter();
+        $this->movieRegistration->registerMovie($movie, $view);
+        return $view->createView();
     }
 
     /**

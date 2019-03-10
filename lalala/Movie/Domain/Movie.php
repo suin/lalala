@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lalala\Movie\Domain;
@@ -8,46 +9,41 @@ class Movie
     /**
      * @var MovieId
      */
-    private $id;
+    private $movieId;
+
     /**
      * @var MovieTitle
      */
     private $title;
+
     /**
      * @var ScreeningTime
      */
     private $screeningTime;
 
-    public function __construct(MovieId $id, MovieTitle $title, ScreeningTime $screeningTime)
-    {
+    public function __construct(
+        MovieId $movieId,
+        MovieTitle $title,
+        ScreeningTime $screeningTime
+    ) {
 
-        $this->id = $id;
+        $this->movieId = $movieId;
         $this->title = $title;
         $this->screeningTime = $screeningTime;
     }
 
-    /**
-     * @return MovieTitle
-     */
+    public function getMovieId(): MovieId
+    {
+        return $this->movieId;
+    }
+
     public function getTitle(): MovieTitle
     {
         return $this->title;
     }
 
-    /**
-     * @return ScreeningTime
-     */
     public function getScreeningTime(): ScreeningTime
     {
         return $this->screeningTime;
     }
-
-    /**
-     * @return MovieId
-     */
-    public function getId(): MovieId
-    {
-        return $this->id;
-    }
-
 }
